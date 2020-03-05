@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-
+/*
 public class Complementaire {
-    private Ensemble ensemble;
+    private MultiSet multiSet;
     private TableHashage hashtable;
     private Reader dictionnaire;
 
-    public Complementaire(Ensemble ensemble, TableHashage hashage, Reader reader) {
-        this.ensemble = ensemble;
+    public Complementaire(MultiSet multiSet, TableHashage hashage, Reader reader) {
+        this.multiSet = multiSet;
         this.hashtable = hashage;
         this.dictionnaire = reader;
     }
@@ -28,7 +28,7 @@ public class Complementaire {
             if (hashtable.containsKey(sequence)){
                 int index = RandomIndex(sequence,str);
                 String str1 = hashtable.HasSameKey(sequence).get(index);
-                boolean booleen = ensemble.equals(new Ensemble(str.concat(str1)));
+                boolean booleen = multiSet.equals(new MultiSet(str.concat(str1)));
 
                 if (!booleen) {continue; }
                 complement.add(str);
@@ -39,6 +39,7 @@ public class Complementaire {
         return "[]";
     }
 
+    /*
     public String complement(){
         StringBuilder str = (StringBuilder) chainage();
         int index = 1;
@@ -63,7 +64,7 @@ public class Complementaire {
 
     protected CharSequence chainage() {
         CharSequence str = new String();
-        for (char caracter : ensemble.getCaracter()){
+        for (char caracter : multiSet.getCaracter()){
             str = str + String.valueOf(caracter);
         }
         return str;
@@ -80,4 +81,4 @@ public class Complementaire {
         return index;
     }
 }
-
+*/

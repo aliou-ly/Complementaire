@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 
-public class Ensemble {
+public class MultiSet {
     private ArrayList<Character> caracter = new ArrayList<>();
-    public Ensemble(String string) {
+    private int hashCode;
+
+    public MultiSet(String string) {
+        this.hashCode = string.codePoints().sum();
         for (char caracters: string.toCharArray()) {
             this.caracter.add(caracters);
         }
@@ -13,8 +16,8 @@ public class Ensemble {
         return caracter;
     }
 
-    public boolean equals(Ensemble ensemble) {
-        return this.getCaracter().equals(ensemble.getCaracter());
+    public boolean equals(MultiSet multiSet) {
+        return this.getCaracter().equals(multiSet.getCaracter());
     }
 
     public boolean contains(char character) {
@@ -24,5 +27,10 @@ public class Ensemble {
 
     public boolean contains(Character character) {
         return caracter.contains(character);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.hashCode;
     }
 }

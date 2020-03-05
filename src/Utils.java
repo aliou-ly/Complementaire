@@ -38,5 +38,4 @@ public class Utils {
                 words.add(str);
         return words;
     }
-
 }

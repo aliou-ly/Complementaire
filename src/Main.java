@@ -7,13 +7,15 @@ public class Main {
         File file = new File("src/dict.txt");
         Reader dictionnaire = new Reader(file);
         TableHashage tableHashage = new TableHashage();
-        Ensemble ensemble = new Ensemble("monpom");
-        Complementaire complementaire = new Complementaire(ensemble, tableHashage, new Reader(file));
-        String mot = "pom", mot2 = "mot";
+        MultiSet multiSet = new MultiSet("plusencore");
+        //Complementaire complementaire = new Complementaire(multiSet, tableHashage, new Reader(file));
+
         for (String str : dictionnaire) {
-            tableHashage.add(str);
+            System.out.println(new MultiSet(str).hashCode());
         }
-        System.out.println(complementaire.complement1());
+
+        //System.out.println(multiSet.getCaracter().toString());
+        //System.out.println(complementaire.complement1());
     }
 
 }

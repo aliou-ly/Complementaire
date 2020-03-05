@@ -5,3 +5,7 @@ tom
 mto
 mop
 pom
+saisie
+encore
+plus
+moins

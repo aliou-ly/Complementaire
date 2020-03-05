@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Reader implements Iterable<String> {
+public class Reader implements Iterator<String> {
     private Scanner fileScanner;
     public Reader(File file) throws FileNotFoundException {
         this.fileScanner = new Scanner(file);
@@ -26,12 +26,12 @@ public class Reader implements Iterable<String> {
         return lineScanner.nextLine();
     }
 
-    @Override
+    /*@Override
     public Iterator<String> iterator() {
         ArrayList<String> words = new ArrayList<>();
 
         while (hasNext())
             words.add(next());
         return words.iterator();
-    }
+    }*/
 }
