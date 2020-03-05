@@ -1,0 +1,7 @@
+mon
+nom
+mot
+tom
+mto
+mop
+pom
