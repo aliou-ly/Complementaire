@@ -1,6 +1,6 @@
 
  import java.util.*;
-
+//
  public class TableHashage {
      private ArrayList<LinkedList<MultiSet>> list = new ArrayList<>(140);
      private Reader reader;
