@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 
@@ -13,22 +14,27 @@ public class Complementaire {
         this.hashtable = hashage;
         this.dictionnaire = reader;
     }
+
     public String complement1() {
         ArrayList<String> complement = new ArrayList<>();
-        StringBuilder sequence =  new StringBuilder(chainage());
         ArrayList<String> listFormed = Utils.listWordsFormed(dictionnaire, (String) chainage());
 
         BoucleFor:
         for (String str : listFormed) {
+            StringBuilder sequence =  new StringBuilder(chainage());
             for (char caracter : str.toCharArray()){
                 sequence.deleteCharAt(sequence.indexOf(String.valueOf(caracter)));
             }
             if (hashtable.containsKey(sequence)){
-                listFormed.add(str);
-                int index = hashtable.HasSameKey(sequence).size();
-                return listFormed.toString();
-            }
+                int index = RandomIndex(sequence,str);
+                String str1 = hashtable.HasSameKey(sequence).get(index);
+                boolean booleen = ensemble.equals(new Ensemble(str.concat(str1)));
 
+                if (!booleen) {continue; }
+                complement.add(str);
+                complement.add(str1);
+                return complement.toString();
+            }
         }
         return "[]";
     }
@@ -61,6 +67,17 @@ public class Complementaire {
             str = str + String.valueOf(caracter);
         }
         return str;
+    }
+    public int RandomIndex(CharSequence str, CharSequence str1) {
+        Random random = new Random();
+        int index = random.nextInt(hashtable.HasSameKey(str).size());
+        if (hashtable.hashcode(str) == hashtable.hashcode(str1)) {
+            if (hashtable.HasSameKey(str).size() <=1 )
+                throw new NoSuchElementException();
+            while (index == hashtable.HasSameKey(str).indexOf(str1))
+                index = random.nextInt(hashtable.HasSameKey(str).size());
+        }
+        return index;
     }
 }
 

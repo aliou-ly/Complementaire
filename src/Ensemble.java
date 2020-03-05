@@ -1,14 +1,28 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Ensemble {
-    private char[] caracter;
+    private ArrayList<Character> caracter = new ArrayList<>();
     public Ensemble(String string) {
-        caracter = string.toCharArray();
+        for (char caracters: string.toCharArray()) {
+            this.caracter.add(caracters);
+        }
     }
 
-    public char[] getCaracter() {
+    public ArrayList<Character> getCaracter() {
+        caracter.sort(Character::compareTo);
         return caracter;
+    }
+
+    public boolean equals(Ensemble ensemble) {
+        return this.getCaracter().equals(ensemble.getCaracter());
+    }
+
+    public boolean contains(char character) {
+
+        return caracter.contains(character);
+    }
+
+    public boolean contains(Character character) {
+        return caracter.contains(character);
     }
 }
