@@ -3,9 +3,11 @@
 //
  public class TableHashage {
      private ArrayList<LinkedList<MultiSet>> list = new ArrayList<>(140);
-     private Reader reader;
+
      public TableHashage (Reader reader) {
-         this.reader = reader;
+        for (int i = 0; i < 140; i++)
+            list.add(null);
+        createList(reader);
      }
 
      public boolean add(MultiSet multiSet) {
@@ -15,80 +17,58 @@
              return false;
          }
          else {
-             if (list.get(index) == null){
+             if (list.get(index) == null) {
                  list.set(index, new LinkedList<>());
                  return list.get(index).add(multiSet);
              }
-             else {
-                return list.get(index).add(multiSet);
-             }
+
          }
+         return list.get(index).add(multiSet);
      }
 
-     private boolean CreateList(Reader reader){
-         boolean booleen = false;
-         BoucleWhile:
-         while(reader.hasNext()){
-            booleen = add(new MultiSet(reader.next()));
+     private void createList(Reader reader){
+
+         while(reader.hasNext()) {
+             add(new MultiSet(reader.next()));
          }
-         return booleen;
      }
 
      public boolean contains(MultiSet multiSet){
        int index = index(multiSet.hashCode());
-
-         return list.get(index).contains(multiSet);
-     }
-
-     private int index(int hashCode){
-         return hashCode % (list.size()-1);
-     }
- }
- /*
-    public ArrayList<String> HasSameKey(CharSequence string) {
-            if (! list.containsKey(hashcode(string)))
-                throw new NoSuchElementException();
-            return new ArrayList<>(list.get(hashcode(string))) ;
-    }
-
-     public boolean add(String string) {
-         if (! list.containsKey(hashcode(string))) {
-            list.put(hashcode(string), new TreeSet<>());
-            return list.get(hashcode(string)).add(string);
-
-         }
+            if (list.get(index) == null) {
+                return false;
+            }
          else {
-             if (! list.get(hashcode(string)).contains(string)) {
-                 return list.get(hashcode(string)).add(string);
+             for (MultiSet multiSet1 : list.get(index)) {
+                if (multiSet.equals(multiSet1)) {
+                    return true;
+                }
              }
          }
          return false;
      }
 
-     public boolean contains(CharSequence string) {
-         if (! list.containsKey(hashcode(string))) {
-             return false;
-         }
-         else {
-            return list.get(hashcode(string)).contains(string);
-         }
+     public boolean containsKey(int hashcode) {
+         return (list.get(index(hashcode)) != null);
      }
 
-     public boolean remove(String string) {
-         if (contains(string)) {
-             return list.get(hashcode(string)).remove(string);
-         }
-         return true;
+     private int index(int hashCode){
+         return hashCode % (list.size());
      }
 
-    public int hashcode(CharSequence string) {
-        return string.codePoints().sum();
-    }
+     public MultiSet getRandomMultiSetOfKey(int hashcode) {
+         if (containsKey(hashcode)) {
+             int index = list.get(index(hashcode)).size();
+             return list.get(index(hashcode)).get(randomIndex(index));
+         }
+         return null;
+     }
 
-    public boolean containsKey(CharSequence string) {
+     private int randomIndex(int index) {
+         Random random = new Random();
+         return random.nextInt(index);
+     }
 
-        return list.containsKey(hashcode(string));
-    }
+     public ArrayList<LinkedList<MultiSet>> getList(){ return list; }
+ }
 
-}
-*/
